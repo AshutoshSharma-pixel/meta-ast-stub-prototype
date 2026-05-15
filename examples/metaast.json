@@ -1,0 +1,39 @@
+{
+  "funcs": [
+    {
+      "name": "sum",
+      "args": [
+        {"name": "a", "type": "number"},
+        {"name": "b", "type": "number"}
+      ],
+      "ret": {"type": "number"},
+      "docstring": "Adds two numbers and returns the result."
+    },
+    {
+      "name": "getUser",
+      "args": [
+        {"name": "id", "type": "number"}
+      ],
+      "ret": {"type": "object"},
+      "docstring": "Retrieves a user profile by ID. Returns a dictionary in Python and an object in TS."
+    },
+    {
+      "name": "processData",
+      "args": [
+        {"name": "data", "type": "unknown"},
+        {"name": "options", "type": "object"}
+      ],
+      "ret": {"type": "boolean"},
+      "docstring": "Processes arbitrary data with given options."
+    },
+    {
+      "name": "logMessage",
+      "args": [
+        {"name": "message", "type": "string"},
+        {"name": "level", "type": "number"}
+      ],
+      "ret": {"type": "any"},
+      "docstring": "Logs a message. Returns void-equivalent (any in this prototype)."
+    }
+  ]
+}

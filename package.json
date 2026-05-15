@@ -1,0 +1,35 @@
+{
+  "name": "meta-ast-stub-prototype",
+  "version": "0.1.0",
+  "description": "Exploratory prototype for generating IntelliSense stubs from meta-ast semantic metadata",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metacall/meta-ast-stub-prototype.git"
+  },
+  "keywords": [
+    "meta-ast",
+    "metacall",
+    "intellisense",
+    "static-analysis",
+    "lsp",
+    "ast",
+    "semantic-graph",
+    "tooling",
+    "stub-generation"
+  ],
+  "author": "MetaCall Contributors",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "generate": "ts-node src/index.ts",
+    "clean": "rm -rf dist output"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
+  }
+}
