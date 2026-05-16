@@ -1,39 +1,42 @@
 {
   "funcs": [
     {
-      "name": "sum",
-      "args": [
-        {"name": "a", "type": "number"},
-        {"name": "b", "type": "number"}
-      ],
-      "ret": {"type": "number"},
-      "docstring": "Adds two numbers and returns the result."
-    },
-    {
       "name": "getUser",
       "args": [
-        {"name": "id", "type": "number"}
+        { "name": "id", "type": "number" }
       ],
-      "ret": {"type": "object"},
-      "docstring": "Retrieves a user profile by ID. Returns a dictionary in Python and an object in TS."
+      "ret": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number" },
+          "profile": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "verified": { "type": "boolean" },
+              "tags": { "type": "array", "elementType": { "type": "string" } }
+            }
+          }
+        }
+      },
+      "docstring": "Retrieves a user profile with nested structures."
     },
     {
-      "name": "processData",
+      "name": "deploy",
       "args": [
-        {"name": "data", "type": "unknown"},
-        {"name": "options", "type": "object"}
+        { "name": "config", "type": "object", "properties": { "env": { "type": "string" } } }
       ],
-      "ret": {"type": "boolean"},
-      "docstring": "Processes arbitrary data with given options."
+      "ret": { "type": "boolean" },
+      "docstring": "Deploys the application."
     },
     {
-      "name": "logMessage",
-      "args": [
-        {"name": "message", "type": "string"},
-        {"name": "level", "type": "number"}
-      ],
-      "ret": {"type": "any"},
-      "docstring": "Logs a message. Returns void-equivalent (any in this prototype)."
+      "name": "validate",
+      "args": [],
+      "ret": { "type": "boolean" },
+      "docstring": "Validates the deployment."
     }
+  ],
+  "references": [
+    { "from": "deploy", "to": "validate", "type": "call" }
   ]
 }

@@ -65,53 +65,76 @@ The prototype consumes a simplified representation of what `meta-ast` produces:
 }
 ```
 
-## Example Generated Outputs
+## Key Features
+
+- **Type Normalization Layer**: Decouples source language types from target language representations.
+- **Complex Type Support**: Generates TypeScript `interface` and Python `TypedDict` for nested objects.
+- **Dependency Graph**: Generates Mermaid and JSON representations of symbol references.
+- **Incremental Watch Mode**: Automatically regenerates stubs when metadata changes.
+- **CLI Feedback**: Rich terminal output with generation summaries.
+
+## Example Input (Complex Types)
+
+The prototype now handles nested structures:
+
+```json
+{
+  "name": "getUser",
+  "args": [{ "name": "id", "type": "number" }],
+  "ret": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "number" },
+      "profile": {
+        "type": "object",
+        "properties": { "name": { "type": "string" } }
+      }
+    }
+  }
+}
+```
+
+## Generated Outputs
 
 ### TypeScript (`metacall.d.ts`)
-
 ```typescript
-/**
- * Adds two numbers and returns the result.
- */
-declare function sum(a: number, b: number): number;
+export interface Profile {
+  name: string;
+}
+
+export interface GetUserResult {
+  id: number;
+  profile: Profile;
+}
+
+export function getUser(id: number): GetUserResult;
 ```
 
 ### Python (`metacall.pyi`)
-
 ```python
-def sum(a: int, b: int) -> int: ...
-    """Adds two numbers and returns the result."""
+class Profile(TypedDict):
+    name: str
+
+class GetUserResult(TypedDict):
+    id: float
+    profile: Profile
+
+def getUser(id: float) -> GetUserResult: ...
 ```
 
 ## CLI Usage
 
-Running the generator produces clean, actionable logs:
-
-```text
-[meta-ast-stub-prototype]
-✓ Parsed semantic metadata
-✓ Generated TypeScript stubs (.d.ts)
-✓ Generated Python stubs (.pyi)
-
-Generation summary:
-- Functions processed: 4
-- Output directory: .../output
-```
-
-## Installation
-
 ```bash
-npm install
-```
-
-## Usage
-
-```bash
+# Single generation run
 npm run generate
+
+# Watch mode for real-time regeneration
+npm run watch
 ```
 
 ## Documentation
 
-- [Architecture Details](docs/ARCHITECTURE.md)
-- [Future Directions](docs/FUTURE_DIRECTIONS.md)
-- [Examples](examples/)
+- [Architecture Details](docs/ARCHITECTURE.md) - Pipeline and normalization layer
+- [Research Notes](docs/RESEARCH_NOTES.md) - Thoughts on TypedDict, LSP, and Tree-sitter
+- [Examples](examples/vscode-validation/) - VS Code validation guide
+
