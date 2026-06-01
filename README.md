@@ -132,9 +132,24 @@ npm run generate
 npm run watch
 ```
 
+## Loader Type Mapping Exploration
+
+During discussions with MetaCall maintainers, we identified a key architectural challenge: **implicit type conversions inside loaders**. 
+
+- **The Problem:** Mappings between host languages (e.g. Python, Node.js, TypeScript) and the MetaCall Core are hardcoded imperatively (e.g. `if/else` checks inside C/C++ loader files). Because they are not exposed as structured metadata, it is extremely difficult for static analysis tooling, documentation generators, and LSP implementations to query or guarantee type safety across language boundaries.
+- **Why This Matters:** Without explicit type mapping metadata, tools must manually duplicate and hardcode conversion logic, leading to structural drift and fragile developer tooling.
+- **Future Directions:** We explore three key approaches: exposing mappings dynamically via a new MetaCall Core C API, statically compiling metadata from loader codebase ASTs, and enforcing compile-time consistency checks to guarantee type alignment.
+
+For more details, see our research and architecture logs:
+- [Loader Type Mapping Research](docs/TYPE_MAPPING_RESEARCH.md)
+- [Loader Type Mapping Architecture Notes](docs/ARCHITECTURE_NOTES.md)
+
 ## Documentation
 
 - [Architecture Details](docs/ARCHITECTURE.md) - Pipeline and normalization layer
 - [Research Notes](docs/RESEARCH_NOTES.md) - Thoughts on TypedDict, LSP, and Tree-sitter
 - [Examples](examples/vscode-validation/) - VS Code validation guide
+- [Loader Type Mapping Research](docs/TYPE_MAPPING_RESEARCH.md) - Detailed analysis of Python, Node, and TypeScript loaders
+- [Loader Type Mapping Architecture Notes](docs/ARCHITECTURE_NOTES.md) - Tooling, IntelliSense, and documentation implications
+
 
