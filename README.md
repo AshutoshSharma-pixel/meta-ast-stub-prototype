@@ -136,5 +136,5 @@ npm run watch
 
 - [Architecture Details](docs/ARCHITECTURE.md) - Pipeline and normalization layer
 - [Research Notes](docs/RESEARCH_NOTES.md) - Thoughts on TypedDict, LSP, and Tree-sitter
-- [Examples](examples/vscode-validation/) - VS Code validation guide
+- [Examples](examples/vscode-validation/) - VS Code validation guide.
 
